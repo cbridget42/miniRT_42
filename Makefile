@@ -6,7 +6,7 @@
 #    By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 17:19:04 by cbridget          #+#    #+#              #
-#    Updated: 2022/09/29 19:46:21 by cbridget         ###   ########.fr        #
+#    Updated: 2022/09/30 18:27:19 by cbridget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = miniRT
 
 HEAD = headers/miniRT.h
 
-SRC = main.c utilities.c
+SRC = main.c utilities.c hooks.c
 
 OBJ = $(addprefix objects/,$(SRC:.c=.o))
 

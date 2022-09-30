@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilities.c                                        :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 19:43:42 by cbridget          #+#    #+#             */
-/*   Updated: 2022/09/30 17:36:38 by cbridget         ###   ########.fr       */
+/*   Created: 2022/09/30 18:18:29 by cbridget          #+#    #+#             */
+/*   Updated: 2022/09/30 18:47:39 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+int	select_keycode(int keycode, t_data *data)
 {
-	*(unsigned int*)(data->addr + (y * data->line_length + x \
-	* (data->bits_per_pixel / 8))) = color;
+	printf("keycode=%d\n", keycode);
+	if (keycode == ESC)
+		ft_close(data);
+	return (0);
 }
 
-int	create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b)
+int	ft_close(t_data *data)
 {
-	return (*(int *)(unsigned char [4]){b, g, r, t});
+	mlx_clear_window(data->mlx, data->mlx_win);
+	mlx_destroy_window(data->mlx, data->mlx_win);
+	exit(0);
 }
