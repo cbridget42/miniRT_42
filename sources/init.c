@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/30 18:18:29 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/02 14:50:57 by cbridget         ###   ########.fr       */
+/*   Created: 2022/10/02 14:37:06 by cbridget          #+#    #+#             */
+/*   Updated: 2022/10/02 14:44:01 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	select_keycode(int keycode, t_minirt *data)
+void	init_rt(t_minirt *data)
 {
-	printf("keycode=%d\n", keycode);
-	if (keycode == ESC)
-		ft_close(data);
-	return (0);
-}
-
-int	ft_close(t_minirt *data)
-{
-	mlx_clear_window(data->mlx.mlx, data->mlx.mlx_win);
-	mlx_destroy_window(data->mlx.mlx, data->mlx.mlx_win);
-	exit(0);
+	data->mlx.mlx = mlx_init();
+	data->mlx.mlx_win = mlx_new_window(data->mlx.mlx, WIDTH, HIGHT, "miniRT");
+	data->mlx.img = mlx_new_image(data->mlx.mlx, WIDTH, HIGHT);
+	data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->mlx.bits_per_pixel, \
+	&data->mlx.line_length, &data->mlx.endian);
 }
