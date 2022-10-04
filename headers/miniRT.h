@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:27:12 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/04 14:24:11 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/04 18:23:24 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,10 @@ typedef struct	s_minirt
 
 typedef struct	s_answer
 {
-	float	t1;
-	float	t2;
+	float		t1;
+	float		t2;
+	float		closest_t;
+	t_sphere	*closest_sphere;
 }				t_answer;
 
 void			init_rt(t_minirt *data);
@@ -96,10 +98,11 @@ float			dotVectors(t_coordinates *a, t_coordinates *b);
 float			vectorLength(t_coordinates *x);
 t_coordinates	vectorNarmolization(t_coordinates *x);
 unsigned int	traceRay(t_minirt *data, t_coordinates *viewport, float t_min, float t_max);
+t_answer		closestIntersection(t_minirt *data, t_coordinates *v1, t_coordinates *v2, float t_min, float t_max);
 void			rayTracing(t_minirt *data);
 float			computeLighting(t_minirt *data, t_coordinates *pl, t_coordinates *norm);
 void			canvasToViewport(t_minirt *data, t_coordinates *vp, float x, float y);
-void			intersectRaySphere(t_minirt *data, t_coordinates *viewport, t_sphere *sphere, t_answer *asw);
+void			intersectRaySphere(t_coordinates *c, t_coordinates *viewport, t_sphere *sphere, t_answer *asw);
 void			my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 unsigned int	create_trgb(unsigned char r, unsigned char g, unsigned char b);
 unsigned int	multiplicationColorByConstant(unsigned int color, float c);

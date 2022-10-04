@@ -6,13 +6,13 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 13:40:23 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/03 14:47:33 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/04 18:17:52 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	intersectRaySphere(t_minirt *data, t_coordinates *viewport, t_sphere *sphere, t_answer *asw)
+void	intersectRaySphere(t_coordinates *c, t_coordinates *viewport, t_sphere *sphere, t_answer *asw)
 {
 	t_coordinates	x;
 	float			k1;
@@ -20,7 +20,7 @@ void	intersectRaySphere(t_minirt *data, t_coordinates *viewport, t_sphere *spher
 	float			k3;
 	float			discriminant;
 
-	x = vectorSubtraction(&data->camera.crdn, &sphere->center);
+	x = vectorSubtraction(c, &sphere->center);
 	k1 = dotVectors(viewport, viewport);
 	k2 = 2.0f * dotVectors(&x, viewport);
 	k3 = dotVectors(&x, &x) - (sphere->radius * sphere->radius);
