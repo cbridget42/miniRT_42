@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:27:12 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/03 16:17:46 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/04 14:24:11 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,25 @@ typedef struct	s_camera
 	t_coordinates	crdn;
 }				t_camera;
 
+typedef struct	s_light_point
+{
+	t_coordinates	crdn;
+	float			intensity;
+}				t_light_point;
+
+typedef struct	s_light_ambient
+{
+	float			intensity;
+	unsigned int	color;
+}				t_light_ambient;
+
 typedef struct	s_minirt
 {
-	t_mlx		mlx;
-	t_scene		scene;
-	t_camera	camera;
+	t_mlx			mlx;
+	t_scene			scene;
+	t_camera		camera;
+	t_list			*light_p;
+	t_light_ambient	light_a;
 }				t_minirt;
 
 typedef struct	s_answer
@@ -76,13 +90,20 @@ typedef struct	s_answer
 
 void			init_rt(t_minirt *data);
 t_coordinates	vectorSubtraction(t_coordinates *a, t_coordinates *b);
+t_coordinates	vectorAddition(t_coordinates *a, t_coordinates *b);
+t_coordinates	multiplicationScalar(t_coordinates *x, float s);
 float			dotVectors(t_coordinates *a, t_coordinates *b);
+float			vectorLength(t_coordinates *x);
+t_coordinates	vectorNarmolization(t_coordinates *x);
 unsigned int	traceRay(t_minirt *data, t_coordinates *viewport, float t_min, float t_max);
 void			rayTracing(t_minirt *data);
+float			computeLighting(t_minirt *data, t_coordinates *pl, t_coordinates *norm);
 void			canvasToViewport(t_minirt *data, t_coordinates *vp, float x, float y);
 void			intersectRaySphere(t_minirt *data, t_coordinates *viewport, t_sphere *sphere, t_answer *asw);
 void			my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 unsigned int	create_trgb(unsigned char r, unsigned char g, unsigned char b);
+unsigned int	multiplicationColorByConstant(unsigned int color, float c);
+float			checkCanal(float canal);
 int				select_keycode(int keycode, t_minirt *data);
 int				ft_close(t_minirt *data);
 void			del(void *d);

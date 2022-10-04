@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 13:40:44 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/03 16:13:08 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/03 16:32:55 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	rayTracing(t_minirt *data)
 			canvasToViewport(data, &viewport, x, y);
 			color = traceRay(data, &viewport, 1.0f, __FLT_MAX__);
 			my_mlx_pixel_put(&data->mlx, WIDTH / 2 + x, HIGHT / 2 - y, color);
-//			my_mlx_pixel_put(&data->mlx, WIDTH / 2 + x, HIGHT / 2 - y, create_trgb(255, 255, 255));
 			y--;
 		}
 		x++;
