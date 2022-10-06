@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:27:12 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/04 18:23:24 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/05 19:49:44 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ typedef struct	s_sphere
 
 typedef struct	s_scene
 {
-	int			viewport_hight;
-	int			viewport_width;
-	int			projection_plane_d;
+	float		viewport_hight;
+	float		viewport_width;
+	float		projection_plane_d;
 	t_list		*spheres;
 }				t_scene;
 
@@ -91,18 +91,21 @@ typedef struct	s_answer
 }				t_answer;
 
 void			init_rt(t_minirt *data);
+
 t_coordinates	vectorSubtraction(t_coordinates *a, t_coordinates *b);
 t_coordinates	vectorAddition(t_coordinates *a, t_coordinates *b);
 t_coordinates	multiplicationScalar(t_coordinates *x, float s);
 float			dotVectors(t_coordinates *a, t_coordinates *b);
 float			vectorLength(t_coordinates *x);
 t_coordinates	vectorNarmolization(t_coordinates *x);
-unsigned int	traceRay(t_minirt *data, t_coordinates *viewport, float t_min, float t_max);
-t_answer		closestIntersection(t_minirt *data, t_coordinates *v1, t_coordinates *v2, float t_min, float t_max);
+
+
+unsigned int	traceRay(t_minirt *data, t_coordinates *ray);
+t_answer		closestIntersection(t_minirt *data, t_coordinates *v1, t_coordinates *v2, float t_min);
 void			rayTracing(t_minirt *data);
 float			computeLighting(t_minirt *data, t_coordinates *pl, t_coordinates *norm);
 void			canvasToViewport(t_minirt *data, t_coordinates *vp, float x, float y);
-void			intersectRaySphere(t_coordinates *c, t_coordinates *viewport, t_sphere *sphere, t_answer *asw);
+void			intersectRaySphere(t_coordinates *c, t_coordinates *ray, t_sphere *sphere, t_answer *asw);
 void			my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 unsigned int	create_trgb(unsigned char r, unsigned char g, unsigned char b);
 unsigned int	multiplicationColorByConstant(unsigned int color, float c);

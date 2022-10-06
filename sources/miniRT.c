@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 13:40:44 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/03 16:32:55 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/05 19:18:02 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	rayTracing(t_minirt *data)
 {
 	int				x;
 	int				y;
-	t_coordinates	viewport;
+	t_coordinates	ray;
 	unsigned int	color;
 
 	x = WIDTH / 2 * -1;
@@ -25,8 +25,8 @@ void	rayTracing(t_minirt *data)
 		y = HIGHT / 2;
 		while (y > HIGHT / 2 * -1)
 		{
-			canvasToViewport(data, &viewport, x, y);
-			color = traceRay(data, &viewport, 1.0f, __FLT_MAX__);
+			canvasToViewport(data, &ray, x, y);
+			color = traceRay(data, &ray);
 			my_mlx_pixel_put(&data->mlx, WIDTH / 2 + x, HIGHT / 2 - y, color);
 			y--;
 		}

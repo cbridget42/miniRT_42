@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:29:40 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/04 18:33:58 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/05 19:52:46 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	main(void)
 
 void pseudoParser(t_minirt *data)
 {
-	data->scene.viewport_hight = 1;
-	data->scene.viewport_width = 1;
-	data->scene.projection_plane_d = 1;
+	data->scene.viewport_hight = tan(90.0f / 2.0f * (M_PI / 180)) * 2;
+	data->scene.viewport_width = tan(90.0f / 2.0f * (M_PI / 180)) * 2;
+	data->scene.projection_plane_d = 1.0f;
 
 	data->light_a.intensity = 0.2f;
 
@@ -54,15 +54,15 @@ void pseudoParser(t_minirt *data)
 
 	t_sphere *sphere1 = malloc(sizeof(t_sphere) * 1);
 	sphere1->center.x = 0;
-	sphere1->center.y = -1;
-	sphere1->center.z = 3;
-	sphere1->radius = 1;
+	sphere1->center.y = -1.5;
+	sphere1->center.z = 7;
+	sphere1->radius = 2.5;
 	sphere1->color = create_trgb(255, 0, 0);
 	data->scene.spheres = ft_lstnew(sphere1);
 	sphere1 = malloc(sizeof(t_sphere) * 1);
-	sphere1->center.x = 2;
+	sphere1->center.x = 1.5;
 	sphere1->center.y = 0;
-	sphere1->center.z = 4;
+	sphere1->center.z = 3;
 	sphere1->radius = 1;
 	sphere1->color = create_trgb(0, 0, 255);
 	ft_lstadd_back(&(data->scene.spheres), ft_lstnew(sphere1));
