@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:29:40 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/05 19:52:46 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/06 19:56:36 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ void pseudoParser(t_minirt *data)
 
 	t_light_point *light_p = malloc(sizeof(t_light_point) * 1);
 	light_p->crdn.x = 2;
-	light_p->crdn.y = 1;
-	light_p->crdn.z = 0;
+	light_p->crdn.y = 5;
+	light_p->crdn.z = -1;
 	light_p->intensity = 0.6f;
 	data->light_p = ft_lstnew(light_p);
 	light_p = malloc(sizeof(t_light_point) * 1);
-	light_p->crdn.x = 1;
-	light_p->crdn.y = 4;
-	light_p->crdn.z = 4;
+	light_p->crdn.x = -2;
+	light_p->crdn.y = 5;
+	light_p->crdn.z = -1;
 	light_p->intensity = 0.4f;
 	ft_lstadd_back(&data->light_p, ft_lstnew(light_p));
 
@@ -64,7 +64,7 @@ void pseudoParser(t_minirt *data)
 	sphere1->center.y = 0;
 	sphere1->center.z = 3;
 	sphere1->radius = 1;
-	sphere1->color = create_trgb(0, 0, 255);
+	sphere1->color = create_trgb(255, 0, 255);
 	ft_lstadd_back(&(data->scene.spheres), ft_lstnew(sphere1));
 	sphere1 = malloc(sizeof(t_sphere) * 1);
 	sphere1->center.x = -2;
@@ -73,13 +73,34 @@ void pseudoParser(t_minirt *data)
 	sphere1->radius = 1;
 	sphere1->color = create_trgb(0, 255, 0);
 	ft_lstadd_back(&(data->scene.spheres), ft_lstnew(sphere1));
-	sphere1 = malloc(sizeof(t_sphere) * 1);
+/*	sphere1 = malloc(sizeof(t_sphere) * 1);
 	sphere1->center.x = 0;
 	sphere1->center.y = -5001;
 	sphere1->center.z = 0;
 	sphere1->radius = 5000;
 	sphere1->color = create_trgb(255, 255, 0);
-	ft_lstadd_back(&(data->scene.spheres), ft_lstnew(sphere1));
+	ft_lstadd_back(&(data->scene.spheres), ft_lstnew(sphere1));*/
+
+	t_plane *plane = malloc(sizeof(t_plane) * 1);
+	plane->center.x = 0;
+	plane->center.y = 0;
+	plane->center.z = 10;
+	plane->normal.x = 0;
+	plane->normal.y = 0;
+	plane->normal.z = -1;
+	plane->color = create_trgb(255, 255, 255);
+	data->scene.planes = ft_lstnew(plane);
+/*	plane = malloc(sizeof(t_plane) * 1);
+	plane->center.x = 0;
+	plane->center.y = -1;
+	plane->center.z = 0;
+	plane->normal.x = 0;
+	plane->normal.y = 1;
+	plane->normal.z = 0;
+	plane->color = create_trgb(255, 0, 255);
+	ft_lstadd_back(&data->scene.planes, ft_lstnew(plane));*/
+
+//	((t_plane *)data->scene.planes->content)->normal = vectorNarmolization(&((t_plane *)data->scene.planes->content)->normal);
 
 	data->camera.crdn.x = 0;
 	data->camera.crdn.y = 0;
