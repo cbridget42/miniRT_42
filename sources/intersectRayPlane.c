@@ -12,13 +12,14 @@
 
 #include "miniRT.h"
 
-void	intersect_ray_plane(t_coordinates *c, t_coordinates *ray, t_plane *plane, t_answer *asw)
+void	intersect_ray_plane(t_coordinates *orig, t_coordinates *ray, t_plane *plane, t_answer *asw)
 {
 	t_coordinates	tmp_vec;
 	float			a;
 	float			b;
 
-	tmp_vec = vectorSubtraction(&plane->center, c);
+	plane->normal = vectorNarmolization(&plane->normal);
+	tmp_vec = vectorSubtraction(orig, &plane->center);
 	a = dotVectors(&tmp_vec, &plane->normal);
 	b = dotVectors(ray, &plane->normal);
 	if (!b)
@@ -26,17 +27,19 @@ void	intersect_ray_plane(t_coordinates *c, t_coordinates *ray, t_plane *plane, t
 		asw->t1 = __FLT_MAX__;
 		return;
 	}
-	asw->t1 = a / b;
+	asw->t1 = -a / b;
+	if (asw->t1 < 0.000001f)
+		asw->t1 = __FLT_MAX__;
 }
 
-void	closest_plane(t_minirt *data, t_coordinates *v1, t_coordinates *v2, float t_min)
+void	closest_plane(t_minirt *data, t_coordinates *orig, t_coordinates *ray, float t_min)
 {
 	t_list	*plane_list;
 
 	plane_list = data->scene.planes;
 	while (plane_list)
 	{
-		intersect_ray_plane(v1, v2, plane_list->content, &data->asw);
+		intersect_ray_plane(orig, ray, plane_list->content, &data->asw);
 		if (data->asw.t1 >= t_min && data->asw.t1 < data->asw.closest_t)
 		{
 			data->asw.closest_t = data->asw.t1;

@@ -6,7 +6,7 @@
 #    By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 17:19:04 by cbridget          #+#    #+#              #
-#    Updated: 2022/10/06 14:49:13 by cbridget         ###   ########.fr        #
+#    Updated: 2022/10/10 19:04:24 by cbridget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ OBJ = $(addprefix objects/,$(SRC:.c=.o))
 
 BUILD_FOLDER := $(shell mkdir -p objects)
 
-FLAGS = -lm -Wall -Wextra #-Werror -O3
+FLAGS = -g3 -lm -Wall -Wextra #-Werror -O3
 
 CC = cc
 
