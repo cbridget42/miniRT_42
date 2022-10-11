@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:27:12 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/10 18:01:09 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:30:08 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINIRT_H
 
 # define HIGHT 500
-# define WIDTH 500
+# define WIDTH 700
 # define ESC 65307
 
 # define SPHERE 101
@@ -64,7 +64,6 @@ typedef struct	s_scene
 {
 	float		viewport_hight;
 	float		viewport_width;
-//	float		projection_plane_d;
 	t_list		*spheres;
 	t_list		*planes;
 }				t_scene;
@@ -126,7 +125,6 @@ unsigned int	traceRay(t_minirt *data, t_coordinates *ray);
 void			closestIntersection(t_minirt *data, t_coordinates *orig, t_coordinates *ray, float t_min);
 void			rayTracing(t_minirt *data);
 float			computeLighting(t_minirt *data, t_coordinates *pl, t_coordinates *norm);
-//void			canvasToViewport(t_minirt *data, t_coordinates *vp, float x, float y);
 void			make_ray(t_minirt *data, t_coordinates *ray, float x, float y);
 void			intersectRaySphere(t_coordinates *c, t_coordinates *ray, t_sphere *sphere, t_answer *asw);
 void			closest_sphere(t_minirt *data, t_coordinates *v1, t_coordinates *v2, float t_min);

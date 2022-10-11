@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:29:40 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/10 18:04:01 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:22:15 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,25 @@ void pseudoParser(t_minirt *data)
 {
 	data->scene.viewport_hight = tan(100.0f / 2.0f * (M_PI / 180)) * 2;
 	data->scene.viewport_width = tan(100.0f / 2.0f * (M_PI / 180)) * 2;
-//	data->scene.projection_plane_d = 1.0f;
 
 	data->light_a.intensity = 0.2f;
 
 	t_light_point *light_p = malloc(sizeof(t_light_point) * 1);
-	light_p->crdn.x = 0;
-	light_p->crdn.y = 10;
-	light_p->crdn.z = 2;
+	light_p->crdn.x = 7;
+	light_p->crdn.y = 7;
+	light_p->crdn.z = 1;
 	light_p->intensity = 0.6f;
 	data->light_p = ft_lstnew(light_p);
-/*	light_p = malloc(sizeof(t_light_point) * 1);
-	light_p->crdn.x = -2;
-	light_p->crdn.y = 5;
-	light_p->crdn.z = -1;
+	light_p = malloc(sizeof(t_light_point) * 1);
+	light_p->crdn.x = -7;
+	light_p->crdn.y = 7;
+	light_p->crdn.z = 1;
 	light_p->intensity = 0.4f;
-	ft_lstadd_back(&data->light_p, ft_lstnew(light_p));*/
+	ft_lstadd_back(&data->light_p, ft_lstnew(light_p));
 
 	t_sphere *sphere1 = malloc(sizeof(t_sphere) * 1);
 	sphere1->center.x = 0;
-	sphere1->center.y = -1.5;
+	sphere1->center.y = 3;
 	sphere1->center.z = 7;
 	sphere1->radius = 2.5;
 	sphere1->color = create_trgb(255, 0, 0);
@@ -101,13 +100,11 @@ void pseudoParser(t_minirt *data)
 	plane->color = create_trgb(255, 0, 255);
 	ft_lstadd_back(&data->scene.planes, ft_lstnew(plane));
 
-//	((t_plane *)data->scene.planes->content)->normal = vectorNarmolization(&((t_plane *)data->scene.planes->content)->normal);
-
 	data->camera.orig.x = 0;
 	data->camera.orig.y = 0;
 	data->camera.orig.z = 0;
 	data->camera.normal.x = 0;
 	data->camera.normal.y = 0;
 	data->camera.normal.z = 1;
-	data->camera.fov = 100.0f;
+	data->camera.fov = 120.0f;
 }

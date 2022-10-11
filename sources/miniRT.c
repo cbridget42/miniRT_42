@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 13:40:44 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/10 17:48:54 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:32:24 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	rayTracing(t_minirt *data)
 		y = 0;
 		while (y < HIGHT)
 		{
-//			canvasToViewport(data, &ray, x, y);
 			make_ray(data, &ray, (float)x * 2 / WIDTH - 1, (float)y * 2 / HIGHT - 1);
 			color = traceRay(data, &ray);
 			my_mlx_pixel_put(&data->mlx, x, y, color);
@@ -34,13 +33,6 @@ void	rayTracing(t_minirt *data)
 		x++;
 	}
 }
-
-/*void	canvasToViewport(t_minirt *data, t_coordinates *vp, float x, float y)
-{
-	vp->x = x * data->scene.viewport_width / WIDTH;
-	vp->y = y * data->scene.viewport_hight / HIGHT;
-	vp->z = data->scene.projection_plane_d;
-}*/
 
 void	make_ray(t_minirt *data, t_coordinates *ray, float x, float y)
 {
@@ -62,11 +54,10 @@ void	config_cam(t_minirt	*data)
 	tmp.x = 0.0f;
 	tmp.y = 1.0f;
 	tmp.z = 0.0f;
-	x = (float)WIDTH / HIGHT;
+	x = (float)HIGHT / WIDTH;
 	data->scene.viewport_hight = tanf(data->camera.fov / 2.0f * (M_PI / 180));
 	data->scene.viewport_width = data->scene.viewport_hight * x;
 	data->camera.z = data->camera.normal;
-	data->camera.z.x += 0.000001;//???
 	tmp = cross_vectors(&data->camera.z, &tmp);
 	data->camera.y = vectorNarmolization(&tmp);
 	data->camera.x = cross_vectors(&data->camera.z, &data->camera.y);
