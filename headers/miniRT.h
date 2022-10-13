@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:27:12 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/11 14:30:08 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/13 19:36:37 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct	s_light_point
 {
 	t_coordinates	crdn;
 	float			intensity;
+	unsigned int	color;
 }				t_light_point;
 
 typedef struct	s_light_ambient
@@ -124,7 +125,7 @@ void			config_cam(t_minirt	*data);
 unsigned int	traceRay(t_minirt *data, t_coordinates *ray);
 void			closestIntersection(t_minirt *data, t_coordinates *orig, t_coordinates *ray, float t_min);
 void			rayTracing(t_minirt *data);
-float			computeLighting(t_minirt *data, t_coordinates *pl, t_coordinates *norm);
+unsigned int	computeLighting(t_minirt *data, t_coordinates *pl, t_coordinates *norm, unsigned int color);
 void			make_ray(t_minirt *data, t_coordinates *ray, float x, float y);
 void			intersectRaySphere(t_coordinates *c, t_coordinates *ray, t_sphere *sphere, t_answer *asw);
 void			closest_sphere(t_minirt *data, t_coordinates *v1, t_coordinates *v2, float t_min);
@@ -133,7 +134,9 @@ void			closest_plane(t_minirt *data, t_coordinates *orig, t_coordinates *ray, fl
 void			my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 unsigned int	create_trgb(unsigned char r, unsigned char g, unsigned char b);
 unsigned int	multiplicationColorByConstant(unsigned int color, float c);
-float			checkCanal(float canal);
+unsigned int	multiply_light_channels(unsigned int c1, unsigned int c2, float c);
+unsigned int	add_colors(unsigned int c1, unsigned int c2);
+float			checkChannel(float canal);
 int				select_keycode(int keycode, t_minirt *data);
 int				ft_close(t_minirt *data);
 void			del(void *d);

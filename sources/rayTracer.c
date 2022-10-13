@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 13:39:21 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/11 14:38:55 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/13 18:50:51 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ unsigned int	traceRay(t_minirt *data, t_coordinates *ray)
 		}
 		color = ((t_plane *)(data->asw.closest_shape->content))->color;
 	}
-	return (multiplicationColorByConstant(color, computeLighting(data, &inter_p, &norm)));
+	return (computeLighting(data, &inter_p, &norm, color));
 }
 
 void	closestIntersection(t_minirt *data, t_coordinates *orig, t_coordinates *ray, float t_min)

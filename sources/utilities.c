@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:43:42 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/04 15:36:21 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/13 19:35:43 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,38 @@ unsigned int	multiplicationColorByConstant(unsigned int color, float c)
 	red = (float)((color & 0x00FF0000) >> 16) * c;
 	green = (float)((color & 0x0000FF00) >> 8) * c;
 	blue = (float)(color & 0x000000FF) * c;
-	red = checkCanal(red);
-	green = checkCanal(green);
-	blue = checkCanal(blue);
+	red = checkChannel(red);
+	green = checkChannel(green);
+	blue = checkChannel(blue);
 	return (create_trgb(red, green, blue));
 }
 
-float	checkCanal(float canal)
+unsigned int	add_colors(unsigned int c1, unsigned int c2)
 {
-	if (canal < 0)
+	unsigned int	res;
+	
+	res = 0;
+	res |= (unsigned int)checkChannel(((c1 & 0x00FF0000) >> 16) + ((c2 & 0x00FF0000) >> 16)) << 16;
+	res |= (unsigned int)checkChannel(((c1 & 0x0000FF00) >> 8) + ((c2 & 0x0000FF00) >> 8)) << 8;
+	res |= (unsigned int)checkChannel((c1 & 0x000000FF) + (c2 & 0x000000FF));
+	return (res);
+}
+
+/*t_coordinates	create_vector(float x, float y, float z)
+{
+	t_coordinates	res;
+
+	res.x = x;
+	res.y = y;
+	res.z = z;
+	return (res);
+}*/
+
+float	checkChannel(float canal)
+{
+	if (canal < 0.0f)
 		return (0.0f);
-	else if (canal > 255)
+	else if (canal > 255.0f)
 		return (255.0f);
 	return (canal);
 }
