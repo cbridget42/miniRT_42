@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:29:40 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/13 19:29:19 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/14 20:23:08 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ int	main(void)
 
 void pseudoParser(t_minirt *data)
 {
-	data->scene.viewport_hight = tan(100.0f / 2.0f * (M_PI / 180)) * 2;
-	data->scene.viewport_width = tan(100.0f / 2.0f * (M_PI / 180)) * 2;
-
+	
 	data->light_a.intensity = 0.2f;
 	data->light_a.color = create_trgb(255, 255, 255);
 
@@ -103,11 +101,23 @@ void pseudoParser(t_minirt *data)
 	plane->color = create_trgb(255, 255, 255);
 	ft_lstadd_back(&data->scene.planes, ft_lstnew(plane));
 
-	data->camera.orig.x = 0;
-	data->camera.orig.y = 0;
-	data->camera.orig.z = 0;
-	data->camera.normal.x = 0;
-	data->camera.normal.y = 0;
-	data->camera.normal.z = 1;
-	data->camera.fov = 120.0f;
+	t_cylinder *cylinder = malloc(sizeof(t_cylinder) * 1);
+	cylinder->center.x = 3;
+	cylinder->center.y = 0;
+	cylinder->center.z = 1;
+	cylinder->normal.x = 0;
+	cylinder->normal.y = 1;
+	cylinder->normal.z = 0;
+	cylinder->height = 4;
+	cylinder->radius = 2;
+	cylinder->color = create_trgb(0, 0, 255);
+	data->scene.cylinders = ft_lstnew(cylinder);
+
+	data->camera.orig.x = 7;
+	data->camera.orig.y = 6;
+	data->camera.orig.z = 5;
+	data->camera.normal.x = -1;
+	data->camera.normal.y = -0.5;
+	data->camera.normal.z = 0;
+	data->camera.fov = 100.0f;
 }

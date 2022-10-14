@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 13:40:44 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/11 14:32:24 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/14 20:17:41 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	config_cam(t_minirt	*data)
 	tmp.y = 1.0f;
 	tmp.z = 0.0f;
 	x = (float)HIGHT / WIDTH;
+	data->camera.normal = vectorNarmolization(&data->camera.normal);
 	data->scene.viewport_hight = tanf(data->camera.fov / 2.0f * (M_PI / 180));
 	data->scene.viewport_width = data->scene.viewport_hight * x;
 	data->camera.z = data->camera.normal;

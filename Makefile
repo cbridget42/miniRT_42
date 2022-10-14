@@ -6,7 +6,7 @@
 #    By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 17:19:04 by cbridget          #+#    #+#              #
-#    Updated: 2022/10/11 14:39:28 by cbridget         ###   ########.fr        #
+#    Updated: 2022/10/14 20:00:17 by cbridget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,13 @@ NAME = miniRT
 HEAD = headers/miniRT.h
 
 SRC = main.c utilities.c hooks.c init.c miniRT.c rayTracer.c vectors.c intersectRaySphere.c \
-computeLighting.c intersectRayPlane.c
+computeLighting.c intersectRayPlane.c intersect_cylinder.c
 
 OBJ = $(addprefix objects/,$(SRC:.c=.o))
 
 BUILD_FOLDER := $(shell mkdir -p objects)
 
-FLAGS = -g3 -lm -Wall -Wextra -Werror -Ofast
+FLAGS = -lm -Wall -Wextra -Werror -Ofast
 
 CC = cc
 
@@ -36,7 +36,7 @@ LIB :
 	$(MAKE) bonus -C libft
 
 $(NAME) : $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -Llibft -lft -o $(NAME)
+	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lz -Llibft -lft $(FLAGS) -o $(NAME)
 
 objects/%.o : sources/%.c $(HEAD) Makefile libft/libft.a mlx_linux/libmlx.a
 	$(CC) $(FLAGS) -iquote headers -iquote libft -I/usr/include -Imlx_linux -c $< -o $@

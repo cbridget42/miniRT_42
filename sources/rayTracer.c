@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 13:39:21 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/13 18:50:51 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:52:53 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ unsigned int	traceRay(t_minirt *data, t_coordinates *ray)
 		}
 		color = ((t_plane *)(data->asw.closest_shape->content))->color;
 	}
+	else
+	{
+		norm = get_cylinder_norm(data, &data->camera.orig, ray, &inter_p);
+		color = ((t_cylinder *)data->asw.closest_shape->content)->color;
+	}
 	return (computeLighting(data, &inter_p, &norm, color));
 }
 
@@ -50,4 +55,5 @@ void	closestIntersection(t_minirt *data, t_coordinates *orig, t_coordinates *ray
 	data->asw.closest_shape = NULL;
 	closest_sphere(data, orig, ray, t_min);
 	closest_plane(data, orig, ray, t_min);
+	closest_cylinder(data, orig, ray, t_min);
 }
