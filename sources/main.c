@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:29:40 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/14 20:23:08 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/15 15:15:22 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,22 +102,22 @@ void pseudoParser(t_minirt *data)
 	ft_lstadd_back(&data->scene.planes, ft_lstnew(plane));
 
 	t_cylinder *cylinder = malloc(sizeof(t_cylinder) * 1);
-	cylinder->center.x = 3;
+	cylinder->center.x = -5;
 	cylinder->center.y = 0;
-	cylinder->center.z = 1;
+	cylinder->center.z = 2;
 	cylinder->normal.x = 0;
-	cylinder->normal.y = 1;
+	cylinder->normal.y = -1;
 	cylinder->normal.z = 0;
 	cylinder->height = 4;
-	cylinder->radius = 2;
+	cylinder->radius = 1;
 	cylinder->color = create_trgb(0, 0, 255);
 	data->scene.cylinders = ft_lstnew(cylinder);
 
-	data->camera.orig.x = 7;
-	data->camera.orig.y = 6;
-	data->camera.orig.z = 5;
-	data->camera.normal.x = -1;
-	data->camera.normal.y = -0.5;
-	data->camera.normal.z = 0;
+	data->camera.orig.x = -1;
+	data->camera.orig.y = 1.5;
+	data->camera.orig.z = -5;
+	data->camera.normal.x = 0;
+	data->camera.normal.y = 0;
+	data->camera.normal.z = 1;
 	data->camera.fov = 100.0f;
 }
