@@ -6,11 +6,11 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 14:37:06 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/02 14:44:01 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/15 19:02:53 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 void	init_rt(t_minirt *data)
 {

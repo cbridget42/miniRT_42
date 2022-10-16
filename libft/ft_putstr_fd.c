@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbridget <cbridget@student.21-schoo>       +#+  +:+       +#+        */
+/*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:13:54 by cbridget          #+#    #+#             */
-/*   Updated: 2021/10/11 17:16:23 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/16 14:08:09 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
+	int	err;
+
 	if (s)
 	{
 		while (*s)
 		{
-			write(fd, s, 1);
+			err = write(fd, s, 1);
 			s++;
 		}
 	}
+	if (err == -1)
+		(void)err;
 }

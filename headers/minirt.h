@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:27:12 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/14 19:47:36 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/16 13:51:09 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define HIGHT 500
-# define WIDTH 700
+# define HIGHT 800
+# define WIDTH 1300
 # define ESC 65307
 
 # define SPHERE 101
@@ -37,32 +37,32 @@ typedef struct	s_mlx
 	int		endian;
 }				t_mlx;
 
-typedef struct	s_coordinates
+typedef struct	s_coords
 {
 	float	x;
 	float	y;
 	float	z;
-}				t_coordinates;
+}				t_coords;
 
 
 typedef struct	s_sphere
 {
-	t_coordinates	center;
+	t_coords		center;
 	float			radius;
 	unsigned int	color;
 }				t_sphere;
 
 typedef struct	s_plane
 {
-	t_coordinates	center;
-	t_coordinates	normal;
+	t_coords		center;
+	t_coords		normal;
 	unsigned int	color;
 }				t_plane;
 
 typedef struct	t_cylinder
 {
-	t_coordinates	center;
-	t_coordinates	normal;
+	t_coords		center;
+	t_coords		normal;
 	float			radius;//diameter should be divided by two
 	float			height;
 	unsigned int	color;
@@ -81,17 +81,17 @@ typedef struct	s_scene
 
 typedef struct	s_camera
 {
-	t_coordinates	orig;
-	t_coordinates	normal;
-	float			fov;
-	t_coordinates	x;
-	t_coordinates	y;
-	t_coordinates	z;
+	t_coords	orig;
+	t_coords	normal;
+	float		fov;
+	t_coords	x;
+	t_coords	y;
+	t_coords	z;
 }				t_camera;
 
 typedef struct	s_light_point
 {
-	t_coordinates	crdn;
+	t_coords		coord;
 	float			intensity;
 	unsigned int	color;
 }				t_light_point;
@@ -123,34 +123,33 @@ typedef struct	s_minirt
 
 void			init_rt(t_minirt *data);
 
-t_coordinates	vectorSubtraction(t_coordinates *a, t_coordinates *b);
-t_coordinates	vectorAddition(t_coordinates *a, t_coordinates *b);
-t_coordinates	multiplicationScalar(t_coordinates *x, float s);
-float			dotVectors(t_coordinates *a, t_coordinates *b);
-float			vectorLength(t_coordinates *x);
-t_coordinates	vectorNarmolization(t_coordinates *x);
-t_coordinates	cross_vectors(t_coordinates *a, t_coordinates *b);
-
+t_coords		vector_subtraction(t_coords *a, t_coords *b);
+t_coords		vector_addition(t_coords *a, t_coords *b);
+t_coords		multiplication_scalar(t_coords *x, float s);
+float			dot_vectors(t_coords *a, t_coords *b);
+float			vector_length(t_coords *x);
+t_coords		vector_narmolization(t_coords *x);
+t_coords		cross_vectors(t_coords *a, t_coords *b);
 
 void			config_cam(t_minirt	*data);
-unsigned int	traceRay(t_minirt *data, t_coordinates *ray);
-void			closestIntersection(t_minirt *data, t_coordinates *orig, t_coordinates *ray, float t_min);
-void			rayTracing(t_minirt *data);
-unsigned int	computeLighting(t_minirt *data, t_coordinates *pl, t_coordinates *norm, unsigned int color);
-void			make_ray(t_minirt *data, t_coordinates *ray, float x, float y);
-void			intersectRaySphere(t_coordinates *orig, t_coordinates *ray, t_sphere *sphere, t_answer *asw);
-void			closest_sphere(t_minirt *data, t_coordinates *orig, t_coordinates *ray, float t_min);
-void			intersect_ray_plane(t_coordinates *orig, t_coordinates *ray, t_plane *plane, t_answer *asw);
-void			closest_plane(t_minirt *data, t_coordinates *orig, t_coordinates *ray, float t_min);
-void			intersect_cylinder(t_coordinates *orig, t_coordinates *ray, t_cylinder *cylinder, t_answer *asw);
-void			closest_cylinder(t_minirt *data, t_coordinates *orig, t_coordinates *ray, float t_min);
-t_coordinates	get_cylinder_norm(t_minirt *data, t_coordinates *orig, t_coordinates *ray, t_coordinates *inter_p);
+unsigned int	trace_ray(t_minirt *data, t_coords *ray);
+void			closest_intersection(t_minirt *data, t_coords *orig, t_coords *ray, float t_min);
+void			ray_tracing(t_minirt *data);
+unsigned int	compute_lighting(t_minirt *data, t_coords *pl, t_coords *norm, unsigned int color);
+void			make_ray(t_minirt *data, t_coords *ray, float x, float y);
+void			intersect_sphere(t_coords *orig, t_coords *ray, t_sphere *sphere, t_answer *asw);
+void			closest_sphere(t_minirt *data, t_coords *orig, t_coords *ray, float t_min);
+void			intersect_ray_plane(t_coords *orig, t_coords *ray, t_plane *plane, t_answer *asw);
+void			closest_plane(t_minirt *data, t_coords *orig, t_coords *ray, float t_min);
+void			intersect_cylinder(t_coords *orig, t_coords *ray, t_cylinder *cylinder, t_answer *asw);
+void			closest_cylinder(t_minirt *data, t_coords *orig, t_coords *ray, float t_min);
+t_coords		get_cylinder_norm(t_minirt *data, t_coords *orig, t_coords *ray, t_coords *inter_p);
 void			my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 unsigned int	create_trgb(unsigned char r, unsigned char g, unsigned char b);
-unsigned int	multiplicationColorByConstant(unsigned int color, float c);
+unsigned int	multiplication_color_constant(unsigned int color, float c);
 unsigned int	multiply_light_channels(unsigned int c1, unsigned int c2, float c);
 unsigned int	add_colors(unsigned int c1, unsigned int c2);
-float			checkChannel(float canal);
+float			check_channel(float canal);
 int				select_keycode(int keycode, t_minirt *data);
 int				ft_close(t_minirt *data);
 void			del(void *d);

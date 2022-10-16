@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersectRayPlane.c                                :+:      :+:    :+:   */
+/*   intersect_plane.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 12:40:58 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/11 14:34:05 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/16 13:57:14 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
-void	intersect_ray_plane(t_coordinates *orig, t_coordinates *ray, t_plane *plane, t_answer *asw)
+void	intersect_ray_plane(t_coords *orig, t_coords *ray, t_plane *plane, t_answer *asw)
 {
-	t_coordinates	tmp_vec;
-	float			a;
-	float			b;
+	t_coords	tmp_vec;
+	float		a;
+	float		b;
 
-	plane->normal = vectorNarmolization(&plane->normal);
-	b = dotVectors(ray, &plane->normal);
+	plane->normal = vector_narmolization(&plane->normal);
+	b = dot_vectors(ray, &plane->normal);
 	if (!b)
 	{
 		asw->t1 = __FLT_MAX__;
 		return;
 	}
-	tmp_vec = vectorSubtraction(orig, &plane->center);
-	a = dotVectors(&tmp_vec, &plane->normal);
+	tmp_vec = vector_subtraction(orig, &plane->center);
+	a = dot_vectors(&tmp_vec, &plane->normal);
 	asw->t1 = -a / b;
 }
 
-void	closest_plane(t_minirt *data, t_coordinates *orig, t_coordinates *ray, float t_min)
+void	closest_plane(t_minirt *data, t_coords *orig, t_coords *ray, float t_min)
 {
 	t_list	*plane_list;
 

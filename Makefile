@@ -6,16 +6,16 @@
 #    By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 17:19:04 by cbridget          #+#    #+#              #
-#    Updated: 2022/10/14 20:00:17 by cbridget         ###   ########.fr        #
+#    Updated: 2022/10/15 23:21:48 by cbridget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 
-HEAD = headers/miniRT.h
+HEAD = headers/minirt.h
 
-SRC = main.c utilities.c hooks.c init.c miniRT.c rayTracer.c vectors.c intersectRaySphere.c \
-computeLighting.c intersectRayPlane.c intersect_cylinder.c
+SRC = main.c utilities.c hooks.c init.c minirt.c raytracer.c vectors.c intersect_sphere.c \
+compute_lighting.c intersect_plane.c intersect_cylinder.c vectors_two.c
 
 OBJ = $(addprefix objects/,$(SRC:.c=.o))
 

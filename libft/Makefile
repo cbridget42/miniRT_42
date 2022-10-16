@@ -6,7 +6,7 @@
 #    By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 15:21:45 by cbridget          #+#    #+#              #
-#    Updated: 2022/09/29 17:33:34 by cbridget         ###   ########.fr        #
+#    Updated: 2022/10/16 14:00:38 by cbridget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJ = $(LIST:.c=.o)
 
 OBJ_BON = $(LIST_BON:.c=.o)
 
-FLAGS = -Wall -Wextra #-Werror -O2
+FLAGS = -Wall -Wextra -Werror -O2
 
 all : $(NAME)
 

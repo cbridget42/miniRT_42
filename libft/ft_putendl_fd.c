@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 18:25:38 by cbridget          #+#    #+#             */
-/*   Updated: 2021/10/09 18:28:26 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/16 14:08:56 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
+	int	err;
+
 	if (s)
 	{
 		while (*s)
 		{
-			write(fd, s, 1);
+			err = write(fd, s, 1);
 			s++;
 		}
-		write(fd, "\n", 1);
+		err = write(fd, "\n", 1);
 	}
+	if (err == -1)
+		(void)err;
 }

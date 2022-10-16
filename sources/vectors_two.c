@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   vectors_two.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/30 18:18:29 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/15 19:02:59 by cbridget         ###   ########.fr       */
+/*   Created: 2022/10/15 18:37:09 by cbridget          #+#    #+#             */
+/*   Updated: 2022/10/15 23:24:14 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	select_keycode(int keycode, t_minirt *data)
+float	vector_length(t_coords *x)
 {
-	printf("keycode=%d\n", keycode);
-	if (keycode == ESC)
-		ft_close(data);
-	return (0);
+	return (sqrtf((x->x * x->x) + (x->y * x->y) + (x->z * x->z)));
 }
 
-int	ft_close(t_minirt *data)
+t_coords	vector_narmolization(t_coords *x)
 {
-	mlx_clear_window(data->mlx.mlx, data->mlx.mlx_win);
-	mlx_destroy_window(data->mlx.mlx, data->mlx.mlx_win);
-	ft_lstclear(&data->scene.spheres, del);
-	ft_lstclear(&data->scene.planes, del);
-	ft_lstclear(&data->light_p, del);
-	exit(0);
+	t_coords	res;
+	float			len;
+
+	len = vector_length(x);
+	res.x = x->x / len;
+	res.y = x->y / len;
+	res.z = x->z / len;
+	return (res);
 }
