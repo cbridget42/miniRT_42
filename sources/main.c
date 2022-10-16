@@ -6,13 +6,13 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:29:40 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/16 13:50:32 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/16 17:52:22 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void pseudoParser(t_minirt *data);
+void	pseudoParser(t_minirt *data);
 
 int	main(void)
 {
@@ -20,15 +20,12 @@ int	main(void)
 
 	init_rt(&data);
 	pseudoParser(&data);
-
 	config_cam(&data);
 	ray_tracing(&data);
 	mlx_put_image_to_window(data.mlx.mlx, data.mlx.mlx_win, data.mlx.img, 0, 0);
-
 	mlx_key_hook(data.mlx.mlx_win, select_keycode, &data);
-	mlx_hook(data.mlx.mlx_win,  17, 0L, ft_close, &data);
+	mlx_hook(data.mlx.mlx_win, 17, 0L, ft_close, &data);
 	mlx_loop(data.mlx.mlx);
-
 	return (0);
 }
 

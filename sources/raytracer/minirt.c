@@ -6,17 +6,17 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 13:40:44 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/16 13:52:38 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/16 17:55:50 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void ray_tracing(t_minirt *data)
+void	ray_tracing(t_minirt *data)
 {
 	int				x;
 	int				y;
-	t_coords 		ray;
+	t_coords		ray;
 	unsigned int	color;
 
 	x = 0;
@@ -25,7 +25,8 @@ void ray_tracing(t_minirt *data)
 		y = 0;
 		while (y < HIGHT)
 		{
-			make_ray(data, &ray, (float)x * 2 / WIDTH - 1, (float)y * 2 / HIGHT - 1);
+			make_ray(data, &ray, (float)x * 2 / WIDTH - 1, \
+					(float)y * 2 / HIGHT - 1);
 			color = trace_ray(data, &ray);
 			my_mlx_pixel_put(&data->mlx, x, y, color);
 			y++;
@@ -34,19 +35,21 @@ void ray_tracing(t_minirt *data)
 	}
 }
 
-void make_ray(t_minirt *data, t_coords *ray, float x, float y)
+void	make_ray(t_minirt *data, t_coords *ray, float x, float y)
 {
 	t_coords	tmp_a;
 	t_coords	tmp_b;
 
-	tmp_a = multiplication_scalar(&data->camera.y, data->scene.viewport_hight * x);
-	tmp_b = multiplication_scalar(&data->camera.x, data->scene.viewport_width * y);
+	tmp_a = multiplication_scalar(&data->camera.y, \
+				data->scene.viewport_hight * x);
+	tmp_b = multiplication_scalar(&data->camera.x, \
+				data->scene.viewport_width * y);
 	tmp_a = vector_addition(&tmp_a, &tmp_b);
 	*ray = vector_addition(&tmp_a, &data->camera.z);
 	*ray = vector_narmolization(ray);
 }
 
-void config_cam(t_minirt *data)
+void	config_cam(t_minirt *data)
 {
 	t_coords	tmp;
 	float		x;

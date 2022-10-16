@@ -6,7 +6,7 @@
 #    By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 17:19:04 by cbridget          #+#    #+#              #
-#    Updated: 2022/10/15 23:21:48 by cbridget         ###   ########.fr        #
+#    Updated: 2022/10/16 19:25:19 by cbridget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,14 @@ NAME = miniRT
 
 HEAD = headers/minirt.h
 
-SRC = main.c utilities.c hooks.c init.c minirt.c raytracer.c vectors.c intersect_sphere.c \
-compute_lighting.c intersect_plane.c intersect_cylinder.c vectors_two.c
+SRC = main.c utilities/utilities.c utilities/hooks.c utilities/init.c raytracer/minirt.c \
+raytracer/raytracer.c utilities/vectors.c raytracer/intersect_sphere.c \
+raytracer/compute_lighting.c raytracer/intersect_plane.c raytracer/intersect_cylinder.c \
+utilities/vectors_two.c utilities/utilities_two.c
 
 OBJ = $(addprefix objects/,$(SRC:.c=.o))
 
-BUILD_FOLDER := $(shell mkdir -p objects)
+BUILD_FOLDERS := $(shell mkdir -p objects; mkdir -p objects/raytracer; mkdir -p objects/utilities)
 
 FLAGS = -lm -Wall -Wextra -Werror -Ofast
 
@@ -46,14 +48,17 @@ bonus : all
 clean :
 	rm -rf objects
 	$(MAKE) clean -C libft
+	$(MAKE) clean -C mlx_linux
 
 fclean :
 	rm -rf objects
 	rm -f $(NAME)
 	$(MAKE) fclean -C libft
+	$(MAKE) clean -C mlx_linux
 
 re :
 	rm -r objects/*.o
 	rm -f $(NAME)
 	$(MAKE) fclean -C libft
+	$(MAKE) clean -C mlx_linux
 	$(MAKE)
