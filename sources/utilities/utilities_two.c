@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:30:26 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/16 18:31:19 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/18 17:54:33 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,14 @@ unsigned int	create_trgb(unsigned char r, unsigned char g, unsigned char b)
 
 	t = 0;
 	return (*(unsigned int *)(unsigned char [4]){b, g, r, t});
+}
+
+t_coords	reflect_ray(t_coords *norm, t_coords *ray)
+{
+	t_coords	reflect;
+
+//	reflect = multiplication_scalar(norm, 2);
+	reflect = multiplication_scalar(norm, dot_vectors(norm, ray) * 2);
+	reflect = vector_subtraction(&reflect, ray);
+	return (reflect);
 }

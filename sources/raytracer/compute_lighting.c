@@ -6,19 +6,22 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:56:51 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/16 16:55:22 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/18 19:06:26 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 unsigned int	compute_lighting(t_minirt *data, t_coords *inter_p, \
-						t_coords *norm, unsigned int color)
+						t_coords *norm, t_coords *r_ray, unsigned int color)
 {
 	t_coords		ray_light;
 	t_list			*light_list;
 	unsigned int	color_p;
 	float			n_dot_l;
+
+	float			r_dot_v;
+	t_coords		reflect;
 
 	color_p = 0;
 	light_list = data->light_p;
@@ -28,12 +31,23 @@ unsigned int	compute_lighting(t_minirt *data, t_coords *inter_p, \
 						light_list->content)->coord, inter_p);
 		if (not_in_shadow(data, inter_p, &ray_light))
 		{
+			t_coords xxx;
+			xxx = ray_light;
 			ray_light = vector_narmolization(&ray_light);
 			n_dot_l = dot_vectors(norm, &ray_light);
 			if (n_dot_l > 0)
 				color_p = add_colors(color_p, multiply_light_channels(color, \
 				((t_light_point *)light_list->content)->color, \
 				((t_light_point *)light_list->content)->intensity * n_dot_l));
+			if (SPECULAR)
+			{
+				reflect = reflect_ray(norm, &xxx);
+				r_dot_v = dot_vectors(&reflect, r_ray);
+				if (r_dot_v > 0)
+					color_p = add_colors(color_p, multiply_light_channels(color, \
+					((t_light_point *)light_list->content)->color, \
+					((t_light_point *)light_list->content)->intensity * powf(r_dot_v / (vector_length(&reflect) * vector_length(r_ray)), SPECULAR)));
+			}
 		}
 		light_list = light_list->next;
 	}

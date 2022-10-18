@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:29:40 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/16 17:52:22 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/18 19:24:57 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,34 @@ void pseudoParser(t_minirt *data)
 	data->light_a.color = create_trgb(255, 255, 255);
 
 	t_light_point *light_p = malloc(sizeof(t_light_point) * 1);
-	light_p->coord.x = 5;
-	light_p->coord.y = 5;
+	light_p->coord.x = 0;
+	light_p->coord.y = 0.1;
 	light_p->coord.z = 1;
 	light_p->intensity = 0.8f;
 	light_p->color = create_trgb(255, 0, 255);
 	data->light_p = ft_lstnew(light_p);
 	light_p = malloc(sizeof(t_light_point) * 1);
-	light_p->coord.x = -6;
+	light_p->coord.x = -3;
 	light_p->coord.y = 7;
 	light_p->coord.z = 0;
 	light_p->intensity = 0.7f;
-	light_p->color = create_trgb(0, 0, 255);
+	light_p->color = create_trgb(255, 255, 255);
 	ft_lstadd_back(&data->light_p, ft_lstnew(light_p));
 
 	t_sphere *sphere1 = malloc(sizeof(t_sphere) * 1);
 	sphere1->center.x = 0;
-	sphere1->center.y = 3;
+	sphere1->center.y = 5;
 	sphere1->center.z = 7;
 	sphere1->radius = 2.5;
+	sphere1->reflect = 0.3;
 	sphere1->color = create_trgb(255, 0, 0);
 	data->scene.spheres = ft_lstnew(sphere1);
 	sphere1 = malloc(sizeof(t_sphere) * 1);
 	sphere1->center.x = 1.5;
-	sphere1->center.y = 0;
+	sphere1->center.y = 1;
 	sphere1->center.z = 3;
 	sphere1->radius = 1;
+	sphere1->reflect = 0.3;
 	sphere1->color = create_trgb(255, 0, 255);
 	ft_lstadd_back(&(data->scene.spheres), ft_lstnew(sphere1));
 	sphere1 = malloc(sizeof(t_sphere) * 1);
@@ -69,6 +71,7 @@ void pseudoParser(t_minirt *data)
 	sphere1->center.y = 0;
 	sphere1->center.z = 4;
 	sphere1->radius = 1;
+	sphere1->reflect = 1.0;
 	sphere1->color = create_trgb(255, 255, 255);
 	ft_lstadd_back(&(data->scene.spheres), ft_lstnew(sphere1));
 /*	sphere1 = malloc(sizeof(t_sphere) * 1);
@@ -86,6 +89,7 @@ void pseudoParser(t_minirt *data)
 	plane->normal.x = 0;
 	plane->normal.y = 0;
 	plane->normal.z = -1;
+	plane->reflect = 0.8;
 	plane->color = create_trgb(255, 255, 255);
 	data->scene.planes = ft_lstnew(plane);
 	plane = malloc(sizeof(t_plane) * 1);
@@ -93,8 +97,9 @@ void pseudoParser(t_minirt *data)
 	plane->center.y = -1;
 	plane->center.z = 0;
 	plane->normal.x = 0;
-	plane->normal.y = -1;
+	plane->normal.y = 1;
 	plane->normal.z = 0;
+	plane->reflect = 0.8;
 	plane->color = create_trgb(255, 255, 255);
 	ft_lstadd_back(&data->scene.planes, ft_lstnew(plane));
 
@@ -107,6 +112,7 @@ void pseudoParser(t_minirt *data)
 	cylinder->normal.z = 0;
 	cylinder->height = 8;
 	cylinder->radius = 1;
+	cylinder->reflect = 0.5;
 	cylinder->color = create_trgb(255, 255, 153);
 	data->scene.cylinders = ft_lstnew(cylinder);
 
@@ -116,5 +122,5 @@ void pseudoParser(t_minirt *data)
 	data->camera.normal.x = 0;
 	data->camera.normal.y = 0;
 	data->camera.normal.z = 1;
-	data->camera.fov = 129.0f;
+	data->camera.fov = 120.0f;
 }

@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 13:40:44 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/16 17:55:50 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/18 19:07:59 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ray_tracing(t_minirt *data)
 		{
 			make_ray(data, &ray, (float)x * 2 / WIDTH - 1, \
 					(float)y * 2 / HIGHT - 1);
-			color = trace_ray(data, &ray);
+			color = trace_ray(data, &data->camera.orig, &ray, 1.0f, 5);
 			my_mlx_pixel_put(&data->mlx, x, y, color);
 			y++;
 		}

@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:27:12 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/16 18:51:28 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/18 19:12:42 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define HIGHT 800
 # define WIDTH 1300
 # define ESC 65307
+
+# define SPECULAR 200
 
 # define SPHERE 101
 # define PLANE 102
@@ -49,6 +51,7 @@ typedef struct s_sphere
 	t_coords		center;
 	float			radius;
 	unsigned int	color;
+	float			reflect;
 }				t_sphere;
 
 typedef struct s_plane
@@ -56,6 +59,7 @@ typedef struct s_plane
 	t_coords		center;
 	t_coords		normal;
 	unsigned int	color;
+	float			reflect;
 }				t_plane;
 
 typedef struct t_cylinder
@@ -65,6 +69,7 @@ typedef struct t_cylinder
 	float			radius;//diameter should be divided by two
 	float			height;
 	unsigned int	color;
+	float			reflect;
 }				t_cylinder;
 
 typedef struct s_scene
@@ -127,16 +132,17 @@ float			dot_vectors(t_coords *a, t_coords *b);
 float			vector_length(t_coords *x);
 t_coords		vector_narmolization(t_coords *x);
 t_coords		cross_vectors(t_coords *a, t_coords *b);
+t_coords		reflect_ray(t_coords *norm, t_coords *ray);
 
 void			config_cam(t_minirt	*data);
-unsigned int	trace_ray(t_minirt *data, t_coords *ray);
+unsigned int	trace_ray(t_minirt *data, t_coords *orig, t_coords *ray, float t_min, int depth);
 void			closest_intersection(t_minirt *data, t_coords *orig, \
 								t_coords *ray, float t_min);
 t_coords		get_surface_normal(t_minirt *data, \
 								t_coords *inter_p, t_coords *ray);
 void			ray_tracing(t_minirt *data);
 unsigned int	compute_lighting(t_minirt *data, t_coords *pl, \
-								t_coords *norm, unsigned int color);
+								t_coords *norm, t_coords *r_ray, unsigned int color);
 char			not_in_shadow(t_minirt *data, t_coords *inter_p, \
 								t_coords *ray_light);
 void			make_ray(t_minirt *data, t_coords *ray, float x, float y);
