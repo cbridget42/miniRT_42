@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 12:40:58 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/16 17:43:37 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:59:15 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,22 @@ void	intersect_plane(t_coords *orig, t_coords *ray, \
 	float		b;
 
 	plane->normal = vector_narmolization(&plane->normal);
+	tmp_vec = vector_subtraction(orig, &plane->center);
+	a = dot_vectors(&tmp_vec, &plane->normal);
 	b = dot_vectors(ray, &plane->normal);
-	if (!b)
+	if (!b || (a < 0 && b < 0) || (a > 0 && b > 0))
 	{
 		asw->t1 = __FLT_MAX__;
 		return ;
 	}
-	tmp_vec = vector_subtraction(orig, &plane->center);
-	a = dot_vectors(&tmp_vec, &plane->normal);
+//	tmp_vec = vector_subtraction(orig, &plane->center);
+//	a = dot_vectors(&tmp_vec, &plane->normal);
 	asw->t1 = -a / b;
+	if (asw->t1 < __FLT_EPSILON__)
+	{
+		asw->t1 = __FLT_MAX__;
+		return ;
+	}
 }
 
 void	closest_plane(t_minirt *data, t_coords *orig, \

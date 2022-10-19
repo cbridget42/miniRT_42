@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:27:12 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/18 19:12:42 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/19 16:57:55 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define ESC 65307
 
 # define SPECULAR 200
+# define DEPTH 10
 
 # define SPHERE 101
 # define PLANE 102
@@ -138,7 +139,7 @@ void			config_cam(t_minirt	*data);
 unsigned int	trace_ray(t_minirt *data, t_coords *orig, t_coords *ray, float t_min, int depth);
 void			closest_intersection(t_minirt *data, t_coords *orig, \
 								t_coords *ray, float t_min);
-t_coords		get_surface_normal(t_minirt *data, \
+t_coords		get_surface_normal(t_minirt *data, t_coords *orig, \
 								t_coords *inter_p, t_coords *ray);
 void			ray_tracing(t_minirt *data);
 unsigned int	compute_lighting(t_minirt *data, t_coords *pl, \

@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 13:39:21 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/18 19:16:17 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/19 16:53:40 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ unsigned int	trace_ray(t_minirt *data, t_coords *orig, t_coords *ray, float t_mi
 		return (create_trgb(0, 0, 0));
 	inter_p = multiplication_scalar(ray, data->asw.closest_t);
 	inter_p = vector_addition(orig, &inter_p);
-	norm = get_surface_normal(data, &inter_p, ray);
+	t_coords r_ray = multiplication_scalar(ray, -1.0f);
+	norm = get_surface_normal(data, orig, &inter_p, ray);
 	float r;
 	if (data->asw.flag == SPHERE)
 	{
@@ -45,7 +46,7 @@ unsigned int	trace_ray(t_minirt *data, t_coords *orig, t_coords *ray, float t_mi
 		r = ((t_cylinder *)data->asw.closest_shape->content)->reflect;
 	}
 
-	t_coords r_ray = multiplication_scalar(ray, -1.0f);
+//	t_coords r_ray = multiplication_scalar(ray, -1.0f);
 	local_color = compute_lighting(data, &inter_p, &norm, &r_ray, color);
 
 //	float r = ;//fix it
@@ -71,7 +72,7 @@ void	closest_intersection(t_minirt *data, t_coords *orig, \
 	closest_cylinder(data, orig, ray, t_min);
 }
 
-t_coords	get_surface_normal(t_minirt *data, t_coords *inter_p, t_coords *ray)
+t_coords	get_surface_normal(t_minirt *data, t_coords *orig, t_coords *inter_p, t_coords *ray)
 {
 	t_coords	norm;
 
@@ -84,13 +85,14 @@ t_coords	get_surface_normal(t_minirt *data, t_coords *inter_p, t_coords *ray)
 	else if (data->asw.flag == PLANE)
 	{
 		norm = ((t_plane *)(data->asw.closest_shape->content))->normal;
-		if (dot_vectors(ray, &norm) > __FLT_EPSILON__)
+		if (dot_vectors(ray, &norm) > 0)
 		{
-			*ray = multiplication_scalar(ray, -1);
-			norm = vector_narmolization(ray);
+//			*ray = multiplication_scalar(ray, -1);
+//			t_coords tmp = multiplication_scalar(ray, -1);
+			norm = multiplication_scalar(&norm, -1);
 		}
 	}
 	else
-		norm = get_cylinder_norm(data, &data->camera.orig, ray, inter_p);
+		norm = get_cylinder_norm(data, /*&data->camera.*/orig, ray, inter_p);
 	return (norm);
 }
