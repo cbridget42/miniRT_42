@@ -6,7 +6,7 @@
 #    By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 17:19:04 by cbridget          #+#    #+#              #
-#    Updated: 2022/10/16 19:25:19 by cbridget         ###   ########.fr        #
+#    Updated: 2022/10/20 19:45:54 by cbridget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJ = $(addprefix objects/,$(SRC:.c=.o))
 
 BUILD_FOLDERS := $(shell mkdir -p objects; mkdir -p objects/raytracer; mkdir -p objects/utilities)
 
-FLAGS = -lm -Wall -Wextra -Werror -Ofast
+FLAGS = -lm -Wall -Wextra -Werror -O3
 
 CC = cc
 

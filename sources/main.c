@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:29:40 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/19 16:58:54 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/20 19:42:29 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void pseudoParser(t_minirt *data)
 	light_p->coord.y = 7;
 	light_p->coord.z = 0;
 	light_p->intensity = 0.7f;
-	light_p->color = create_trgb(255, 255, 255);
+	light_p->color = create_trgb(0, 0, 255);
 	ft_lstadd_back(&data->light_p, ft_lstnew(light_p));
 
 	t_sphere *sphere1 = malloc(sizeof(t_sphere) * 1);
@@ -154,7 +154,7 @@ void pseudoParser(t_minirt *data)
 	cylinder->height = 8;
 	cylinder->radius = 1;
 	cylinder->reflect = 0.1;
-	cylinder->color = create_trgb(255, 255, 153);
+	cylinder->color = create_trgb(255, 228, 196);
 	data->scene.cylinders = ft_lstnew(cylinder);
 
 	data->camera.orig.x = -1;

@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:27:12 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/19 16:57:55 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/20 19:38:40 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ typedef struct s_coords
 	float	z;
 }				t_coords;
 
+typedef struct s_ray
+{
+	t_coords	orig;
+	t_coords	dir;
+}				t_ray;
+
 typedef struct s_sphere
 {
 	t_coords		center;
@@ -67,7 +73,7 @@ typedef struct t_cylinder
 {
 	t_coords		center;
 	t_coords		normal;
-	float			radius;//diameter should be divided by two
+	float			radius;
 	float			height;
 	unsigned int	color;
 	float			reflect;
@@ -121,7 +127,7 @@ typedef struct s_minirt
 	t_camera		camera;
 	t_list			*light_p;
 	t_light_ambient	light_a;
-	t_answer		asw;//it contains the return value from the intersection functions.
+	t_answer		asw;
 }				t_minirt;
 
 void			init_rt(t_minirt *data);
@@ -134,35 +140,34 @@ float			vector_length(t_coords *x);
 t_coords		vector_narmolization(t_coords *x);
 t_coords		cross_vectors(t_coords *a, t_coords *b);
 t_coords		reflect_ray(t_coords *norm, t_coords *ray);
+void			set_options(t_minirt *data, float *r, unsigned int *color);
 
 void			config_cam(t_minirt	*data);
-unsigned int	trace_ray(t_minirt *data, t_coords *orig, t_coords *ray, float t_min, int depth);
-void			closest_intersection(t_minirt *data, t_coords *orig, \
-								t_coords *ray, float t_min);
-t_coords		get_surface_normal(t_minirt *data, t_coords *orig, \
-								t_coords *inter_p, t_coords *ray);
+unsigned int	trace_ray(t_minirt *data, t_ray *ray, float t_min, int depth);
+void			closest_intersection(t_minirt *data, t_ray *ray, float t_min);
+t_coords		get_surface_normal(t_minirt *data, t_ray *ray, \
+								t_coords *inter_p);
 void			ray_tracing(t_minirt *data);
-unsigned int	compute_lighting(t_minirt *data, t_coords *pl, \
-								t_coords *norm, t_coords *r_ray, unsigned int color);
+unsigned int	compute_lighting(t_minirt *data, t_ray *r_ray, \
+								t_coords *norm, unsigned int color);
+unsigned int	compute_intencity(t_list *light_list, t_coords *norm, \
+								t_ray *r_ray, unsigned int color);
+unsigned int	hi_norminette(t_list *light_list, unsigned int *color_p, \
+								unsigned int color, int flag);
 char			not_in_shadow(t_minirt *data, t_coords *inter_p, \
-								t_coords *ray_light);
-void			make_ray(t_minirt *data, t_coords *ray, float x, float y);
-void			intersect_sphere(t_coords *orig, t_coords *ray, \
-								t_sphere *sphere, t_answer *asw);
-void			closest_sphere(t_minirt *data, t_coords *orig, \
-								t_coords *ray, float t_min);
-void			intersect_plane(t_coords *orig, t_coords *ray, \
-								t_plane *plane, t_answer *asw);
-void			closest_plane(t_minirt *data, t_coords *orig, \
-								t_coords *ray, float t_min);
-void			intersect_cylinder(t_coords *orig, t_coords *ray, \
+								t_coords *dir_light);
+void			make_dir(t_minirt *data, t_coords *dir, float x, float y);
+void			intersect_sphere(t_ray *ray, t_sphere *sphere, t_answer *asw);
+void			closest_sphere(t_minirt *data, t_ray *ray, float t_min);
+void			intersect_plane(t_ray *ray, t_plane *plane, t_answer *asw);
+void			closest_plane(t_minirt *data, t_ray *ray, float t_min);
+void			intersect_cylinder(t_ray *ray, t_cylinder *cylinder, \
+								t_answer *asw);
+void			intersect_cylinder_two(t_coords *x, t_ray *ray, \
 								t_cylinder *cylinder, t_answer *asw);
-void			intersect_cylinder_two(t_coords *x, t_coords *ray, \
-								t_cylinder *cylinder, t_answer *asw);
-void			closest_cylinder(t_minirt *data, t_coords *orig, \
-								t_coords *ray, float t_min);
-t_coords		get_cylinder_norm(t_minirt *data, t_coords *orig, \
-								t_coords *ray, t_coords *inter_p);
+void			closest_cylinder(t_minirt *data, t_ray *ray, float t_min);
+t_coords		get_cylinder_norm(t_minirt *data, t_ray *ray, \
+								t_coords *inter_p);
 void			my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 unsigned int	create_trgb(unsigned char r, unsigned char g, unsigned char b);
 unsigned int	multiplication_color_constant(unsigned int color, float c);

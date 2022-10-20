@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:30:26 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/18 17:54:33 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/20 19:29:32 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_coords	reflect_ray(t_coords *norm, t_coords *ray)
 {
 	t_coords	reflect;
 
-//	reflect = multiplication_scalar(norm, 2);
 	reflect = multiplication_scalar(norm, dot_vectors(norm, ray) * 2);
 	reflect = vector_subtraction(&reflect, ray);
 	return (reflect);

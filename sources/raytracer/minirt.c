@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 13:40:44 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/19 12:51:43 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:49:56 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ray_tracing(t_minirt *data)
 {
 	int				x;
 	int				y;
-	t_coords		ray;
+	t_ray			ray;
 	unsigned int	color;
 
 	x = 0;
@@ -25,9 +25,10 @@ void	ray_tracing(t_minirt *data)
 		y = 0;
 		while (y < HIGHT)
 		{
-			make_ray(data, &ray, (float)x * 2 / WIDTH - 1, \
+			make_dir(data, &ray.dir, (float)x * 2 / WIDTH - 1, \
 					(float)y * 2 / HIGHT - 1);
-			color = trace_ray(data, &data->camera.orig, &ray, 1.0f, DEPTH);
+			ray.orig = data->camera.orig;
+			color = trace_ray(data, &ray, 1.0f, DEPTH);
 			my_mlx_pixel_put(&data->mlx, x, y, color);
 			y++;
 		}
@@ -35,7 +36,7 @@ void	ray_tracing(t_minirt *data)
 	}
 }
 
-void	make_ray(t_minirt *data, t_coords *ray, float x, float y)
+void	make_dir(t_minirt *data, t_coords *dir, float x, float y)
 {
 	t_coords	tmp_a;
 	t_coords	tmp_b;
@@ -45,8 +46,8 @@ void	make_ray(t_minirt *data, t_coords *ray, float x, float y)
 	tmp_b = multiplication_scalar(&data->camera.x, \
 				data->scene.viewport_width * y);
 	tmp_a = vector_addition(&tmp_a, &tmp_b);
-	*ray = vector_addition(&tmp_a, &data->camera.z);
-	*ray = vector_narmolization(ray);
+	*dir = vector_addition(&tmp_a, &data->camera.z);
+	*dir = vector_narmolization(dir);
 }
 
 void	config_cam(t_minirt *data)
