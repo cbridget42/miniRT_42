@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 22:16:19 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/20 19:28:22 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/21 18:24:46 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	intersect_cylinder(t_ray *ray, t_cylinder *cylinder, t_answer *asw)
 	dot_vectors(&x, &cylinder->normal)) - (cylinder->radius * cylinder->radius);
 	discriminant = (b * b) - (4 * a * c);
 	asw->t1 = (-b + sqrt(discriminant)) / (2 * a);
-	if (discriminant < 0 || asw->t1 < 0)
+	if (discriminant < EPS || asw->t1 < EPS)
 	{
 		asw->t1 = __FLT_MAX__;
 		asw->t2 = __FLT_MAX__;
@@ -51,9 +51,9 @@ void	intersect_cylinder_two(t_coords *x, t_ray *ray, \
 			* asw->t2 + dot_vectors(x, &cylinder->normal);
 	k2 = dot_vectors(&ray->dir, &cylinder->normal) \
 			* asw->t1 + dot_vectors(x, &cylinder->normal);
-	if (k1 > 0 && k1 <= cylinder->height)
+	if (k1 > EPS && k1 <= cylinder->height)
 		asw->t1 = asw->t2;
-	else if (k2 > 0 && k2 <= cylinder->height)
+	else if (k2 > EPS && k2 <= cylinder->height)
 		;
 	else
 		asw->t1 = __FLT_MAX__;
@@ -67,7 +67,7 @@ void	closest_cylinder(t_minirt *data, t_ray *ray, float t_min)
 	while (cylinder_list)
 	{
 		intersect_cylinder(ray, cylinder_list->content, &data->asw);
-		if (data->asw.t1 >= t_min && data->asw.t1 < data->asw.closest_t)
+		if (data->asw.t1 >= t_min && data->asw.t1 < data->asw.closest_t && data->asw.t1 > EPS)
 		{
 			data->asw.closest_t = data->asw.t1;
 			data->asw.closest_shape = cylinder_list;

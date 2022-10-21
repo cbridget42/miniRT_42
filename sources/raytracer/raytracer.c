@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 13:39:21 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/19 19:33:22 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/21 18:26:28 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_coords	get_surface_normal(t_minirt *data, t_ray *ray, t_coords *inter_p)
 	else if (data->asw.flag == PLANE)
 	{
 		norm = ((t_plane *)(data->asw.closest_shape->content))->normal;
-		if (dot_vectors(&ray->dir, &norm) > 0)
+		if (dot_vectors(&ray->dir, &norm) > EPS)
 			norm = multiplication_scalar(&norm, -1);
 	}
 	else

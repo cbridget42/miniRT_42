@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:29:40 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/20 19:42:29 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/21 18:32:57 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,14 @@ void pseudoParser(t_minirt *data)
 	sphere1->center.z = 5;
 	sphere1->radius = 3;
 	sphere1->reflect = 0.1;
+	sphere1->color = create_trgb(255, 255, 0);
+	ft_lstadd_back(&(data->scene.spheres), ft_lstnew(sphere1));
+	sphere1 = malloc(sizeof(t_sphere) * 1);
+	sphere1->center.x = 0;
+	sphere1->center.y = -2501;
+	sphere1->center.z = 0;
+	sphere1->radius = 5000;
+	sphere1->reflect = 0;
 	sphere1->color = create_trgb(255, 255, 0);
 	ft_lstadd_back(&(data->scene.spheres), ft_lstnew(sphere1));
 
