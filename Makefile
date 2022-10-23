@@ -6,7 +6,7 @@
 #    By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 17:19:04 by cbridget          #+#    #+#              #
-#    Updated: 2022/10/23 17:56:45 by cbridget         ###   ########.fr        #
+#    Updated: 2022/10/23 19:31:50 by cbridget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC = main.c utilities/utilities.c utilities/hooks.c utilities/init.c raytracer/
 raytracer/raytracer.c utilities/vectors.c raytracer/intersect_sphere.c \
 raytracer/compute_lighting.c raytracer/intersect_plane.c raytracer/intersect_cylinder.c \
 utilities/vectors_two.c utilities/utilities_two.c \
-transform/transform.c transform/change_obj.c transform/ch_view.c
+transform/transform.c transform/change_obj.c transform/ch_view.c transform/resize.c
 
 OBJ = $(addprefix objects/,$(SRC:.c=.o))
 

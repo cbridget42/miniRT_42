@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 18:18:29 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/23 17:46:20 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/23 20:02:16 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ int	select_keycode(int keycode, t_minirt *data)
 		change_review(data);
 	else if (keycode == E)
 		change_obj(data);
+	return (select_keycode_two(keycode, data));
+}
+
+int	select_keycode_two(int keycode, t_minirt *data)
+{
+	if (keycode == Z)
+		change_radius(data, '+');
+	else if (keycode == X)
+		change_radius(data, '-');
+	else if (keycode == C)
+		change_height(data, '+');
+	else if (keycode == V)
+		change_height(data, '-');
 	return (0);
 }
 

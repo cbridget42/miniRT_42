@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:27:12 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/23 13:45:46 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/23 19:57:57 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 # define ARROW_DOWN 65364
 # define Q 113
 # define E 101
+# define Z 122
+# define X 120
+# define C 99
+# define V 118
 
 # define SPECULAR 200
 # define DEPTH 5
@@ -35,10 +39,6 @@
 # define CYLINDER 103
 # define CAM 104
 # define LIGHT 105
-
-//# define X 1001
-//# define Y 1002
-//# define Z 1003
 
 # include "structs.h"
 # include "transform.h"
@@ -92,6 +92,7 @@ unsigned int	multiply_light_channels(unsigned int c1, \
 unsigned int	add_colors(unsigned int c1, unsigned int c2);
 float			check_channel(float canal);
 int				select_keycode(int keycode, t_minirt *data);
+int				select_keycode_two(int keycode, t_minirt *data);
 int				ft_close(t_minirt *data);
 void			del(void *d);
 

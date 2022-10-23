@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 21:16:11 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/23 18:15:43 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/23 19:27:41 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void	change_sphere(t_minirt *data, void **obj_tmp, int *i);
 void	change_plane(t_minirt *data, void **obj_tmp, int *i);
 void	change_cylinder(t_minirt *data, void **obj_tmp, int *i);
 void	change_light(t_minirt *data, void **obj_tmp, int *i);
+
+void	change_radius(t_minirt *data, char sign);
+void	change_height(t_minirt *data, char sign);
 
 void	rerender(t_minirt *data, int flag);
 
