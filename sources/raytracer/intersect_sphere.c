@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 13:40:23 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/21 18:19:21 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/23 17:51:27 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,15 @@ void	closest_sphere(t_minirt *data, t_ray *ray, float t_min)
 	while (sphere_list)
 	{
 		intersect_sphere(ray, sphere_list->content, &data->asw);
-		if (data->asw.t1 >= t_min && data->asw.t1 < data->asw.closest_t && data->asw.t1 > EPS)
+		if (data->asw.t1 >= t_min && data->asw.t1 < data->asw.closest_t \
+			&& data->asw.t1 > EPS)
 		{
 			data->asw.closest_t = data->asw.t1;
 			data->asw.closest_shape = sphere_list;
 			data->asw.flag = SPHERE;
 		}
-		if (data->asw.t2 >= t_min && data->asw.t2 < data->asw.closest_t && data->asw.t1 > EPS)
+		if (data->asw.t2 >= t_min && data->asw.t2 < data->asw.closest_t \
+			&& data->asw.t1 > EPS)
 		{
 			data->asw.closest_t = data->asw.t2;
 			data->asw.closest_shape = sphere_list;

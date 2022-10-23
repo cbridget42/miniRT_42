@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 22:16:19 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/21 18:24:46 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/23 17:50:39 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	closest_cylinder(t_minirt *data, t_ray *ray, float t_min)
 	while (cylinder_list)
 	{
 		intersect_cylinder(ray, cylinder_list->content, &data->asw);
-		if (data->asw.t1 >= t_min && data->asw.t1 < data->asw.closest_t && data->asw.t1 > EPS)
+		if (data->asw.t1 >= t_min && data->asw.t1 < data->asw.closest_t \
+			&& data->asw.t1 > EPS)
 		{
 			data->asw.closest_t = data->asw.t1;
 			data->asw.closest_shape = cylinder_list;

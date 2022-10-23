@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:29:40 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/21 18:32:57 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/23 18:17:28 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(void)
 
 	init_rt(&data);
 	pseudoParser(&data);
-	config_cam(&data);
+	config_cam(&data, 1);
 	ray_tracing(&data);
 	mlx_put_image_to_window(data.mlx.mlx, data.mlx.mlx_win, data.mlx.img, 0, 0);
 	mlx_key_hook(data.mlx.mlx_win, select_keycode, &data);
@@ -82,14 +82,14 @@ void pseudoParser(t_minirt *data)
 	sphere1->reflect = 0.1;
 	sphere1->color = create_trgb(255, 255, 0);
 	ft_lstadd_back(&(data->scene.spheres), ft_lstnew(sphere1));
-	sphere1 = malloc(sizeof(t_sphere) * 1);
+/*	sphere1 = malloc(sizeof(t_sphere) * 1);
 	sphere1->center.x = 0;
 	sphere1->center.y = -2501;
 	sphere1->center.z = 0;
 	sphere1->radius = 5000;
 	sphere1->reflect = 0;
 	sphere1->color = create_trgb(255, 255, 0);
-	ft_lstadd_back(&(data->scene.spheres), ft_lstnew(sphere1));
+	ft_lstadd_back(&(data->scene.spheres), ft_lstnew(sphere1));*/
 
 	t_plane *plane = malloc(sizeof(t_plane) * 1);
 	plane->center.x = 0;
@@ -154,12 +154,12 @@ void pseudoParser(t_minirt *data)
 
 	t_cylinder *cylinder = malloc(sizeof(t_cylinder) * 1);
 	cylinder->center.x = -5;
-	cylinder->center.y = 2;
+	cylinder->center.y = 5;
 	cylinder->center.z = 2;
 	cylinder->normal.x = 0;
 	cylinder->normal.y = -1;
 	cylinder->normal.z = 0;
-	cylinder->height = 8;
+	cylinder->height = 4;
 	cylinder->radius = 1;
 	cylinder->reflect = 0.1;
 	cylinder->color = create_trgb(255, 228, 196);

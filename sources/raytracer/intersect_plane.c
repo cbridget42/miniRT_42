@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 12:40:58 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/21 18:21:56 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/23 17:52:45 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	closest_plane(t_minirt *data, t_ray *ray, float t_min)
 	while (plane_list)
 	{
 		intersect_plane(ray, plane_list->content, &data->asw);
-		if (data->asw.t1 >= t_min && data->asw.t1 < data->asw.closest_t && data->asw.t1 > EPS)
+		if (data->asw.t1 >= t_min && data->asw.t1 < data->asw.closest_t \
+			&& data->asw.t1 > EPS)
 		{
 			data->asw.closest_t = data->asw.t1;
 			data->asw.closest_shape = plane_list;

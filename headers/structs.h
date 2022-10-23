@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:14:23 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/21 18:15:38 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/23 18:15:58 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,9 @@ typedef struct s_minirt
 	t_list			*light_p;
 	t_light_ambient	light_a;
 	t_answer		asw;
+	int				transform_flag;
+	int				norm_flag;
+	void			*transform_obj;
 }				t_minirt;
 
-# endif
+#endif

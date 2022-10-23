@@ -6,7 +6,7 @@
 #    By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 17:19:04 by cbridget          #+#    #+#              #
-#    Updated: 2022/10/20 19:45:54 by cbridget         ###   ########.fr        #
+#    Updated: 2022/10/23 17:56:45 by cbridget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,12 @@ HEAD = headers/minirt.h
 SRC = main.c utilities/utilities.c utilities/hooks.c utilities/init.c raytracer/minirt.c \
 raytracer/raytracer.c utilities/vectors.c raytracer/intersect_sphere.c \
 raytracer/compute_lighting.c raytracer/intersect_plane.c raytracer/intersect_cylinder.c \
-utilities/vectors_two.c utilities/utilities_two.c
+utilities/vectors_two.c utilities/utilities_two.c \
+transform/transform.c transform/change_obj.c transform/ch_view.c
 
 OBJ = $(addprefix objects/,$(SRC:.c=.o))
 
-BUILD_FOLDERS := $(shell mkdir -p objects; mkdir -p objects/raytracer; mkdir -p objects/utilities)
+BUILD_FOLDERS := $(shell mkdir -p objects; mkdir -p objects/raytracer; mkdir -p objects/utilities; mkdir -p objects/transform)
 
 FLAGS = -lm -Wall -Wextra -Werror -O3
 

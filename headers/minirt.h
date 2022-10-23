@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:27:12 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/21 18:16:15 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/23 13:45:46 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,32 @@
 # define HIGHT 800
 # define WIDTH 1300
 # define ESC 65307
+# define A 97
+# define D 100
+# define S 115
+# define W 119
+# define ARROW_UP 65362
+# define ARROW_DOWN 65364
+# define Q 113
+# define E 101
 
 # define SPECULAR 200
-# define DEPTH 10
+# define DEPTH 5
 
 # define EPS 0.000001
 
-# define SPHERE 101
+# define SPHERE 106
 # define PLANE 102
 # define CYLINDER 103
+# define CAM 104
+# define LIGHT 105
+
+//# define X 1001
+//# define Y 1002
+//# define Z 1003
 
 # include "structs.h"
+# include "transform.h"
 # include <mlx.h>
 # include <stdio.h>
 # include <math.h>
@@ -43,7 +58,7 @@ t_coords		cross_vectors(t_coords *a, t_coords *b);
 t_coords		reflect_ray(t_coords *norm, t_coords *ray);
 void			set_options(t_minirt *data, float *r, unsigned int *color);
 
-void			config_cam(t_minirt	*data);
+void			config_cam(t_minirt	*data, int flag);
 unsigned int	trace_ray(t_minirt *data, t_ray *ray, float t_min, int depth);
 void			closest_intersection(t_minirt *data, t_ray *ray, float t_min);
 t_coords		get_surface_normal(t_minirt *data, t_ray *ray, \

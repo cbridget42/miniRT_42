@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 13:40:44 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/19 17:49:56 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/23 17:53:13 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	make_dir(t_minirt *data, t_coords *dir, float x, float y)
 	*dir = vector_narmolization(dir);
 }
 
-void	config_cam(t_minirt *data)
+void	config_cam(t_minirt *data, int flag)
 {
 	t_coords	tmp;
 	float		x;
@@ -58,10 +58,14 @@ void	config_cam(t_minirt *data)
 	tmp.x = 0.0f;
 	tmp.y = 1.0f;
 	tmp.z = 0.0f;
-	x = (float)HIGHT / WIDTH;
 	data->camera.normal = vector_narmolization(&data->camera.normal);
-	data->scene.viewport_hight = tanf(data->camera.fov / 2.0f * (M_PI / 180));
-	data->scene.viewport_width = data->scene.viewport_hight * x;
+	if (flag)
+	{
+		x = (float)HIGHT / WIDTH;
+		data->scene.viewport_hight = tanf(data->camera.fov / 2.0f \
+		* (M_PI / 180));
+		data->scene.viewport_width = data->scene.viewport_hight * x;
+	}
 	data->camera.z = data->camera.normal;
 	tmp = cross_vectors(&data->camera.z, &tmp);
 	data->camera.y = vector_narmolization(&tmp);
