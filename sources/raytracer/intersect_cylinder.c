@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 22:16:19 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/23 17:50:39 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:10:24 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	closest_cylinder(t_minirt *data, t_ray *ray, float t_min)
 			data->asw.closest_shape = cylinder_list;
 			data->asw.flag = CYLINDER;
 		}
+		if (intersect_lid(ray, cylinder_list->content, &data->asw, t_min))
+			data->asw.closest_shape = cylinder_list;
 		cylinder_list = cylinder_list->next;
 	}
 }

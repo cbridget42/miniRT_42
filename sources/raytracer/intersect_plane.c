@@ -6,13 +6,13 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 12:40:58 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/23 17:52:45 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/26 14:48:35 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	intersect_plane(t_ray *ray, t_plane *plane, t_answer *asw)
+void	intersect_plane(t_ray *ray, t_plane *plane, float *t1)
 {
 	t_coords	tmp_vec;
 	float		a;
@@ -24,13 +24,13 @@ void	intersect_plane(t_ray *ray, t_plane *plane, t_answer *asw)
 	b = dot_vectors(&ray->dir, &plane->normal);
 	if (!b || (a < 0 && b < 0) || (a > 0 && b > 0))
 	{
-		asw->t1 = __FLT_MAX__;
+		*t1 = __FLT_MAX__;
 		return ;
 	}
-	asw->t1 = -a / b;
-	if (asw->t1 < EPS)
+	*t1 = -a / b;
+	if (*t1 < EPS)
 	{
-		asw->t1 = __FLT_MAX__;
+		*t1 = __FLT_MAX__;
 		return ;
 	}
 }
@@ -42,7 +42,7 @@ void	closest_plane(t_minirt *data, t_ray *ray, float t_min)
 	plane_list = data->scene.planes;
 	while (plane_list)
 	{
-		intersect_plane(ray, plane_list->content, &data->asw);
+		intersect_plane(ray, plane_list->content, &data->asw.t1);
 		if (data->asw.t1 >= t_min && data->asw.t1 < data->asw.closest_t \
 			&& data->asw.t1 > EPS)
 		{

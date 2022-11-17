@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:27:12 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/23 19:57:57 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/11/17 23:25:23 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,44 @@
 # define CAM 104
 # define LIGHT 105
 
+# define LID 107
+
 # include "structs.h"
 # include "transform.h"
+# include "get_next_line.h"
 # include <mlx.h>
 # include <stdio.h>
 # include <math.h>
+# include <fcntl.h>
 
 void			init_rt(t_minirt *data);
+void			free_info(t_minirt	*info);
+
+int				check_scene(t_minirt	*info, char	*scene);
+int				ft_strn_ncmp(char *s1, char	*s2, size_t start, size_t n);
+int				if_char(t_minirt *info, char a, char b);
+int				is_char(char a, char b);
+int				if_str_arr(t_minirt *info, char	**arr, int x);
+void			fill_ambient(t_minirt *info, char	*str);
+void			fill_camera(t_minirt *info, char	*str);
+void			fill_light(t_minirt *info, char	*str);
+void			fill_sphere(t_minirt *info, char	*str);
+void			fill_plane(t_minirt *info, char	*str);
+void			fill_cylinder(t_minirt *info, char	*str);
+float			fill_float(t_minirt *info, char	*str, int type);
+unsigned int	fill_rgb(t_minirt *info, char	*str);
+void			fill_coord(t_minirt *info, t_coords	*coord, char	*str,
+					int norm);
+void			free_str_arr(char **arr);
+float			ft_atof(char *str);
+
+int				init_point(t_minirt	*info, t_list	**list);
+int				init_sphere(t_minirt	*info, t_list	**list);
+int				init_plane(t_minirt	*info, t_list	**list);
+int				init_cylinder(t_minirt	*info, t_list	**list);
+int				check_info_x(char	**arr, int x);
+int				char_value(char	*str, char c, int x, int less);
+int				correct_chars(char	*arr, int x);
 
 t_coords		vector_subtraction(t_coords *a, t_coords *b);
 t_coords		vector_addition(t_coords *a, t_coords *b);
@@ -75,12 +106,16 @@ char			not_in_shadow(t_minirt *data, t_coords *inter_p, \
 void			make_dir(t_minirt *data, t_coords *dir, float x, float y);
 void			intersect_sphere(t_ray *ray, t_sphere *sphere, t_answer *asw);
 void			closest_sphere(t_minirt *data, t_ray *ray, float t_min);
-void			intersect_plane(t_ray *ray, t_plane *plane, t_answer *asw);
+void			intersect_plane(t_ray *ray, t_plane *plane, float *t1);
 void			closest_plane(t_minirt *data, t_ray *ray, float t_min);
 void			intersect_cylinder(t_ray *ray, t_cylinder *cylinder, \
 								t_answer *asw);
 void			intersect_cylinder_two(t_coords *x, t_ray *ray, \
 								t_cylinder *cylinder, t_answer *asw);
+int				intersect_lid(t_ray *ray, t_cylinder *cylinder,
+					t_answer *asw, float t_min);
+int				check_intr_lid(t_ray *ray, t_cylinder *cylinder,
+					t_plane *lid, t_answer *asw);
 void			closest_cylinder(t_minirt *data, t_ray *ray, float t_min);
 t_coords		get_cylinder_norm(t_minirt *data, t_ray *ray, \
 								t_coords *inter_p);

@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:14:23 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/23 18:15:58 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:00:13 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,19 @@ typedef struct s_answer
 	float		closest_t;
 	t_list		*closest_shape;
 	char		flag;
+	t_coords	norm_lid;
+	float		t_min;
 }				t_answer;
+
+typedef struct s_check
+{
+	int	l_a;
+	int	l_p;
+	int	cam;
+	int	sph;
+	int	pln;
+	int	cyl;
+}		t_check;
 
 typedef struct s_minirt
 {
@@ -117,6 +129,9 @@ typedef struct s_minirt
 	int				transform_flag;
 	int				norm_flag;
 	void			*transform_obj;
+	t_check			check;
+	char			**str_arr;
+	int				info_error;
 }				t_minirt;
 
 #endif

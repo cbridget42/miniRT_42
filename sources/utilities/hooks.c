@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: ymirna <ymirna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 18:18:29 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/23 20:02:16 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:38:55 by ymirna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,13 @@ int	ft_close(t_minirt *data)
 {
 	mlx_clear_window(data->mlx.mlx, data->mlx.mlx_win);
 	mlx_destroy_window(data->mlx.mlx, data->mlx.mlx_win);
-	ft_lstclear(&data->scene.spheres, del);
-	ft_lstclear(&data->scene.planes, del);
-	ft_lstclear(&data->scene.cylinders, del);
-	ft_lstclear(&data->light_p, del);
+	if (data->scene.spheres)
+		ft_lstclear(&data->scene.spheres, del);
+	if (data->scene.planes)
+		ft_lstclear(&data->scene.planes, del);
+	if (data->scene.cylinders)
+		ft_lstclear(&data->scene.cylinders, del);
+	if (data->light_p)
+		ft_lstclear(&data->light_p, del);
 	exit(0);
 }

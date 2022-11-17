@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: ymirna <ymirna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 13:40:44 by cbridget          #+#    #+#             */
-/*   Updated: 2022/10/23 17:53:13 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:46:27 by ymirna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,27 @@ void	make_dir(t_minirt *data, t_coords *dir, float x, float y)
 	*dir = vector_narmolization(dir);
 }
 
+void	config_cam_two(t_minirt *data, t_coords *tmp)
+{
+	if (data->camera.normal.y != 0 && data->camera.normal.z == 0)
+	{
+		tmp->y = 0.0f;
+		tmp->z = 1.0f;
+	}
+	else
+	{
+		tmp->y = 1.0f;
+		tmp->z = 0.0f;
+	}
+}
+
 void	config_cam(t_minirt *data, int flag)
 {
 	t_coords	tmp;
 	float		x;
 
 	tmp.x = 0.0f;
-	tmp.y = 1.0f;
-	tmp.z = 0.0f;
+	config_cam_two(data, &tmp);
 	data->camera.normal = vector_narmolization(&data->camera.normal);
 	if (flag)
 	{

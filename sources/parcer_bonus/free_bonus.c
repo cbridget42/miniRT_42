@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: ymirna <ymirna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 13:05:59 by cbridget          #+#    #+#             */
-/*   Updated: 2022/11/17 12:33:28 by cbridget         ###   ########.fr       */
+/*   Created: 2022/10/12 21:24:27 by ymirna            #+#    #+#             */
+/*   Updated: 2022/10/24 15:05:35 by ymirna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minirt.h"
 
-size_t	ft_strlen(const char *s)
+void	free_str_arr(char	**arr)
 {
-	size_t	res;
+	int	i;
 
-	res = 0;
-	if (s)
+	i = 0;
+	while (arr[i])
 	{
-		while (*s)
-		{
-			s ++;
-			res ++;
-		}
+		free(arr[i]);
+		i++;
 	}
-	return (res);
+	free(arr);
 }
