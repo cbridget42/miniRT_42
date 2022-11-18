@@ -8,18 +8,18 @@ You can read about ray tracing [here](https://en.wikipedia.org/wiki/Ray_tracing_
   
 ### Requirements:
 * Mandatory part:  
-  • You need at least these 3 simple geometric objects: plane, sphere, cylinder.  
-  • If applicable, all possible intersections and the inside of the object must be handled  
-  correctly.  
-  • Your program must be able to resize the object’s unique properties: diameter for a  
-  sphere and the width and height for a cylinder.  
-  • Your program must be able to apply translation and rotation transformation to  
-  objects, lights and cameras (except for spheres and lights that cannot be rotated).  
-  • Light management: spot brightness, hard shadows, ambiance lighting (objects are  
-  never completely in the dark). You must implement Ambient and diffuse lighting.  
+  + You need at least these 3 simple geometric objects: plane, sphere, cylinder.  
+  + If applicable, all possible intersections and the inside of the object must be handled  
+    correctly.  
+  + Your program must be able to resize the object’s unique properties: diameter for a  
+    sphere and the width and height for a cylinder.  
+  + Your program must be able to apply translation and rotation transformation to  
+    objects, lights and cameras (except for spheres and lights that cannot be rotated).  
+  + Light management: spot brightness, hard shadows, ambiance lighting (objects are  
+    never completely in the dark). You must implement Ambient and diffuse lighting.  
 * bonus part:  
-  • Add specular reflection to have a full Phong reflection model.  
-  • Colored and multi-spot lights.  
+  + Add specular reflection to have a full Phong reflection model.  
+  + Colored and multi-spot lights.  
   
 You can see the full assignment here [subject](https://github.com/cbridget42/miniRT_42/blob/main/subject/en.subject.pdf)  
 Coding style: [norminette](https://github.com/cbridget42/miniRT_42/blob/main/subject/en.norm.pdf)  
